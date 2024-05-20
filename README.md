@@ -10,6 +10,7 @@ composer create-project laravel/laravel:^10.0 laravel-vercel
 ```
 
 ## Now create account in Neon and get postgres database crendentials from there [mostly the db connection string]
+## https://neon.tech/docs/guides/laravel
 
 
 ## now comment mysql connection from env and paste the following connection for pgsql in .env file for local setup and migration run 
