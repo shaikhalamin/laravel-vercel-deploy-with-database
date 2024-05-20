@@ -39,6 +39,6 @@ Route::get('/test-db-con', function () {
         $dbname = DB::connection()->getDatabaseName();
         echo "Connected successfully to the database. Database name is :" . $dbname;
     } catch (Exception $e) {
-        echo "Error in connecting to the database";
+        echo "Error in connecting to the database". $e->getMessage();
     }
 });
