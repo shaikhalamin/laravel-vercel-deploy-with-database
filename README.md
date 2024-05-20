@@ -33,6 +33,9 @@ like api
     
 Step 2 : Create an index file in that folder with the following content 
 
+```
+
+```bash
 
 <?php
 
@@ -40,12 +43,12 @@ Step 2 : Create an index file in that folder with the following content
 require __DIR__ . '/../public/index.php';
 
 
+```
 
 
-Step 3 : 
+## Step 3 : Now open your Route Service Provider and change api prefix to v1/api like the following:
 
-Now open your Route Service Provider and change api prefix to v1/api like the following:
-
+```bash
 
 $this->routes(function () {
         Route::middleware('api')
@@ -56,26 +59,72 @@ $this->routes(function () {
                 ->group(base_path('routes/web.php'));
 });
 
+```
 
+## Step 4:  Create .vercelignore file in the root path like the following with content
 
+```bash
+    
+     /vendor
 
-Step 4: Now create your own api route like following
+```
+        
 
+## Step 5: Create a vercel.json file in the root path like the following with content
+
+```bash
+
+{
+    "version": 2,
+    "framework": null,
+    "functions": {
+        "api/index.php": { "runtime": "vercel-php@0.6.0" }
+    },
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/api/index.php",
+            "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+        }
+    ],
+    "env": {
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_URL": "http://localhost",
+
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/packages.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
+        "VIEW_COMPILED_PATH": "/tmp",
+
+        "CACHE_DRIVER": "array",
+        "LOG_CHANNEL": "stderr",
+        "SESSION_DRIVER": "cookie"
+    }
+}
+
+```
+
+## Step 6: Now create your own api route like following
+
+```bash
 Route::apiResource('users', UserController::class);
+```
 
 
-Step 5:  Now push your code to github and connect with vercel
+## Step 7:  Now push your code to github and connect with vercel
 
-Step 6: Add few environment variables from vercel setting like the following:
-
+## Step 8: Add few environment variables from vercel setting like the following:
+```bash
      API_KEY= your laravel app key
      DB_CONNECTION=pgsql
      DATABASE_URL=postgres://{username}:endpoint={endpoint_id};{password}@{hostname}/{databasename}?sslmode=require
-
-
-Step 7: your are done. Your application is up and running [booom]
-
 ```
+
+## Step 9: your are done. Your application is up and running [booom]
+
 
 
 
