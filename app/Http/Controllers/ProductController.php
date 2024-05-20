@@ -14,12 +14,23 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $response = [
-            'success' => true,
-            'data' => Product::paginate(20)
-        ];
 
-        return response()->json($response, RESPONSE::HTTP_OK);
+        try {
+            $response = [
+                'success' => true,
+                'data' => Product::paginate(20)
+            ];
+
+            return response()->json($response, RESPONSE::HTTP_OK);
+        } catch (\Throwable $th) {
+            $response = [
+                'success' => false,
+                'data' => null,
+                'message' => $th->getMessage()
+            ];
+
+            return response()->json($response, $th->getCode());
+        }
     }
 
     /**
