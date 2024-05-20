@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,15 @@ Route::apiResource('categories', CategoryController::class);
 
 Route::get('/test-vercel', function () {
     return [1, 3, 5];
+});
+
+
+Route::get('/test-db-con', function () {
+    try {
+        $dbconnect = DB::connection()->getPDO();
+        $dbname = DB::connection()->getDatabaseName();
+        echo "Connected successfully to the database. Database name is :" . $dbname;
+    } catch (Exception $e) {
+        echo "Error in connecting to the database";
+    }
 });
