@@ -18,7 +18,7 @@ composer create-project laravel/laravel:^10.0 laravel-vercel
 
 ```bash
 DB_CONNECTION=pgsql
-DATABASE_URL=postgres://{username}:endpoint={endpoint_id};{password}@{hostname}/{databasename}?sslmode=require
+DATABASE_URL=postgresql://{username}:{password}@{db_host}/{db_name}?sslmode=require
 
 ```
 
@@ -78,7 +78,7 @@ $this->routes(function () {
     "version": 2,
     "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.6.0" }
+        "api/index.php": { "runtime": "vercel-php@0.7.1" }
     },
     "routes": [
         {
@@ -124,6 +124,11 @@ Route::apiResource('users', UserController::class);
 ```
 
 ## Step 9: your are done. Your application is up and running [booom]
+
+
+N:B: 
+
+If you get build error then create a dist folder in your root path with .gitignore file and change the node.js version to 18 from vercel dashboard general settings to fix the issue
 
 
 
